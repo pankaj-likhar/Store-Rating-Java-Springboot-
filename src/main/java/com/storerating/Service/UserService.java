@@ -15,14 +15,6 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 
-//	@Autowired
-//	private PasswordEncoder passwordEncoder;
-
-//	public User save(User user) {
-//		user.setPassword(passwordEncoder.encode(user.getPassword()));
-//		return userRepository.save(user);
-//	}
-
 	public User save(User user) {
 	    if (user.getId() == null) {
 	        // New user, encode password
@@ -83,5 +75,16 @@ public class UserService {
 	
 	public List<User> findAllUsers() {
 	    return userRepository.findAll();
+	}
+	
+	public User updateUserDetails(Long userId, String name, String email, String address) {
+	    User user = findById(userId);
+	    if (user != null) {
+	        user.setName(name);
+	        user.setEmail(email);
+	        user.setAddress(address);
+	        return userRepository.save(user);
+	    }
+	    return null;
 	}
 }

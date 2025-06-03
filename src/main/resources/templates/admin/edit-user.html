@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Edit Store - Admin</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container">
+			<a class="navbar-brand" href="#">Store Rating System</a>
+			<div class="navbar-nav ms-auto">
+				<a class="nav-link" th:href="@{/admin/dashboard}">Dashboard</a>
+				<a class="nav-link" th:href="@{/logout}">Logout</a>
+			</div>
+		</div>
+	</nav>
+
+<div class="container mt-5">
+	<h3>Edit Role for <span th:text="${user.name}">User</span></h3>
+	<form th:action="@{/admin/update-user-role}" method="post">
+		<input type="hidden" name="userId" th:value="${user.id}" />
+		<div class="mb-3">
+			<label for="role" class="form-label">Role</label>
+			<select class="form-select" name="role">
+				<option th:each="r : ${roles}" th:value="${r}" th:text="${r}"
+				        th:selected="${r == user.role}"></option>
+			</select>
+		</div>
+		<button type="submit" class="btn btn-success">Update</button>
+		<a th:href="@{/admin/show-all-users}" class="btn btn-secondary">Cancel</a>
+	</form>
+</div>
+
+
+
+
+	<!-- Scripts -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

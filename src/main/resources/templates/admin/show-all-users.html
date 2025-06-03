@@ -35,6 +35,7 @@
 								<th>Name</th>
 								<th>Email</th>
 								<th>Role</th>
+								<th>Action</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -43,6 +44,13 @@
 								<td th:text="${user.name}"></td>
 								<td th:text="${user.email}"></td>
 								<td th:text="${user.role}"></td>
+								<td>
+									<a class="btn btn-warning btn-sm me-2"
+										th:href="@{/admin/edit-user-role/{id}(id=${user.id})}">
+										<i class="fas fa-edit"></i> Edit Role
+									</a>
+								</td>
+
 							</tr>
 						</tbody>
 					</table>

@@ -35,10 +35,10 @@ public class StoreOwnerController {
 		List<Store> ownedStores = storeService.findByOwner(owner);
 		List<Rating> allRatings = ratingService.findByStores(ownedStores);
 
-		 if (!ownedStores.isEmpty()) {
-	            model.addAttribute("store", ownedStores.get(0));
-	        }
-		
+		if (!ownedStores.isEmpty()) {
+			model.addAttribute("store", ownedStores.get(0));
+		}
+
 		double averageRating = 0.0;
 		if (!allRatings.isEmpty()) {
 			averageRating = allRatings.stream().mapToInt(Rating::getRating).average().orElse(0.0);
@@ -48,7 +48,9 @@ public class StoreOwnerController {
 		model.addAttribute("ratings", allRatings);
 		model.addAttribute("averageRating", Math.round(averageRating * 100.0) / 100.0);
 		model.addAttribute("totalRatings", allRatings.size());
+		model.addAttribute("ownerName", owner.getName()); // ✅ Add this line
 
 		return "store-owner/dashboard";
 	}
+
 }

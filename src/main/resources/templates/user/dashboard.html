@@ -29,11 +29,18 @@
 		<div class="container">
 			<a class="navbar-brand" href="#">Store Rating System</a>
 			<div class="navbar-nav ms-auto">
-				<span class="navbar-text me-3"> Welcome, <span th:text="${#authentication.name}">User</span></span>
+				<span class="navbar-text me-3">
+					Welcome,
+					<a th:href="@{/user/edit-user-profile/{id}(id=${userId})}"
+						class="text-decoration-none text-warning">
+						<span th:text="${userName}">User</span>
+					</a>
+				</span>
 				<a class="nav-link" th:href="@{/logout}">Logout</a>
 			</div>
 		</div>
 	</nav>
+
 
 	<div class="container mt-4">
 		<div class="d-flex justify-content-between align-items-center mb-4">

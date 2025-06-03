@@ -32,10 +32,14 @@ public class UserController {
 	
 
 	@GetMapping("/dashboard")
-	public String dashboard(Model model) {
+	public String dashboard(Model model, Authentication authentication) {
+		User user = userService.findByEmail(authentication.getName()); // get user using email from auth
+		model.addAttribute("userName", user != null ? user.getName() : "User"); // add userName to the model
+		model.addAttribute("userId", user.getId());
 		model.addAttribute("stores", storeService.findAll());
 		return "user/dashboard";
 	}
+
 
 	@GetMapping("/rate-store/{storeId}")
 	public String rateStore(@PathVariable Long storeId, Model model, Authentication authentication) {
@@ -76,8 +80,25 @@ public class UserController {
 			ratingService.save(newRating);
 		}
 
-//		return "redirect:/user/rate-store/" + storeId + "?success";
 		return "redirect:/user/dashboard" + "?success";
+	}
+
+	
+    @GetMapping("/edit-user-profile/{id}")
+    public String editUserProfile(@PathVariable Long id, Model model) {
+        User user = userService.findById(id);
+        model.addAttribute("user", user);
+        return "user/edit-user-profile";
+    }
+
+
+	@PostMapping("/update-user-profile")
+	public String updateUserProfile(@RequestParam Long userId,
+	                                @RequestParam String name,
+	                                @RequestParam String email,
+	                                @RequestParam String address) {
+	    userService.updateUserDetails(userId, name, email, address);
+	    return "redirect:/user/dashboard?profileUpdated";
 	}
 
 	

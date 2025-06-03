@@ -104,12 +104,21 @@ public class AdminController {
 		return "redirect:/admin/manage-stores?deleted";
 	}
 
+
+	@GetMapping("/edit-user-role/{id}")
+	public String editUserRoleForm(@PathVariable Long id, Model model) {
+		User user = userService.findById(id);
+		model.addAttribute("user", user);
+		model.addAttribute("roles", User.Role.values());
+		return "admin/edit-user";
+	}
+
 	@PostMapping("/update-user-role")
 	public String updateUserRole(@RequestParam Long userId, @RequestParam User.Role role) {
 		userService.updateUserRole(userId, role);
 		return "redirect:/admin/dashboard?roleUpdated";
 	}
-	
+
 	@GetMapping("/edit-store/{id}")
 	public String editStoreForm(@PathVariable Long id, Model model) {
 	    Store store = storeService.findById(id);

@@ -50,12 +50,18 @@ public class User {
 	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
 	private List<Store> ownedStores = new ArrayList<>();
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//	private List<Rating> ratings = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Rating> ratings = new ArrayList<>();
+
 
 	public enum Role {
 		SYSTEM_ADMIN, STORE_OWNER, NORMAL_USER
 	}
+
+	private String authProvider; // "local" or "google"
 
 	// Constructors
 	public User() {
@@ -141,4 +147,11 @@ public class User {
 		this.ratings = ratings;
 	}
 
+	public String getAuthProvider() {
+		return authProvider;
+	}
+
+	public void setAuthProvider(String authProvider) {
+		this.authProvider = authProvider;
+	}
 }

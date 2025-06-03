@@ -38,9 +38,21 @@
 		<h1 class="mb-4">Admin Dashboard</h1>
 
 		<!-- Success Messages -->
-		<div th:if="${param.userAdded}" class="alert alert-success">User added successfully!</div>
-		<div th:if="${param.storeAdded}" class="alert alert-success">Store added successfully!</div>
-		<div th:if="${param.roleUpdated}" class="alert alert-success">User role updated successfully!</div>
+		<div th:if="${param.userAdded}" class="alert alert-success alert-dismissible fade show" role="alert">
+			User added successfully!
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+
+		<div th:if="${param.storeAdded}" class="alert alert-success alert-dismissible fade show" role="alert">
+			Store added successfully!
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+
+		<div th:if="${param.roleUpdated}" class="alert alert-success alert-dismissible fade show" role="alert">
+			User role updated successfully!
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+
 
 		<!-- Statistics Cards -->
 		<div class="row mb-4">
@@ -142,6 +154,17 @@
 	</div>
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script>
+		// Automatically close alerts after 3 seconds
+		setTimeout(function () {
+			var alerts = document.querySelectorAll('.alert');
+			alerts.forEach(function (alert) {
+				var bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
+				bsAlert.close();
+			});
+		}, 3000); // 3000 milliseconds = 3 seconds
+	</script>
+
 </body>
 
 </html>
