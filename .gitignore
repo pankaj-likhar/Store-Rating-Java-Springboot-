@@ -33,4 +33,4 @@ build/
 .vscode/
 
 # Ignore secret files
-google-oauth.properties
+/src/main/resources/google-oauth.properties
