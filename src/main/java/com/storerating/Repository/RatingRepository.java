@@ -3,11 +3,10 @@ package com.storerating.Repository;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import com.storerating.Entity.Rating;
 import com.storerating.Entity.Store;
 import com.storerating.Entity.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RatingRepository extends JpaRepository<Rating, Long> {
 
